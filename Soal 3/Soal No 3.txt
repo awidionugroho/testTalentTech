@@ -1,0 +1,14 @@
+Jika dalam 1 projek terdapat 3 branch pada repository
+Development : terdapat penambahan fitur A
+QA : sedang testing fitur B
+Production : ditemukan issue yang harus diperbaiki saat itu juga
+Apa yang harus dilakukan supaya issue dapat diperbaiki serta branch QA & Development tidak 
+terjadi conflict dan tetap up-to-date terhadap perbaikan issue?
+
+
+Jawaban
+1. Buat branch baru berdasar Production yaitu branch BugFixing,
+2. Fixing error di branch BugFixing
+3. Setelah bug fixing selesai dilakukan, selanjutnya melalui tahapan QA Bug Fixing untuk memastikan fixing sudah layak production
+4. Apabila sudah lolos tahapan QA Bug Fixing, maka branch BugFixing sudah boleh di Push ke branch Production
+5. Setelah branch Production update bug fixing terbaru maka selanjutnya branch QA dan branch Development diminta untuk Pull code terbaru dari Production.

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grafik Penduduk Indonesia 2024</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>Grafik Jumlah Penduduk Indonesia 2024 (dalam Ribu)</h1>
+    <div style="height: 400px; width: 1200px">
+      <canvas id="myChart"></canvas>
+      <p>Sumber: bps.go.id</p>
+    </div>
+
+    <script>
+      fetch("http://localhost:3000/api/data")
+        .then((response) => response.json())
+        .then((data) => {
+          const labels = data.map((item) => item.provinsi);
+          const values = data.map((item) => item.value);
+
+          const ctx = document.getElementById("myChart").getContext("2d");
+          const myChart = new Chart(ctx, {
+            type: "bar",
+            data: {
+              labels: labels,
+              datasets: [
+                {
+                  label: "Provinsi",
+                  data: values,
+                  backgroundColor: "rgba(75, 192, 192, 0.2)",
+                  borderColor: "rgba(75, 192, 192, 1)",
+                  borderWidth: 1,
+                },
+              ],
+            },
+            options: {
+              responsive: true,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+            },
+          });
+        })
+        .catch((error) => console.error("Error fetching data: ", error));
+    </script>
+  </body>
+</html>
